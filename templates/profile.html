@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | TeamMate AI</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #050b14;
+            color: white;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 80px auto;
+        }
+
+        .card {
+            background: #0b1724;
+            border: 1px solid #17374a;
+            border-radius: 16px;
+            padding: 35px;
+        }
+
+        h1 {
+            color: #00e5ff;
+        }
+
+        p {
+            color: #9fb1bd;
+            line-height: 1.8;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 22px;
+            background: #00e5ff;
+            color: #031018;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h1>My Profile</h1>
+
+            <p>
+                Welcome,
+                <strong>{{ user_name }}</strong>
+            </p>
+
+            <p>
+                Your TeamMate AI profile will contain your
+                technical skills, interests, availability and
+                project preferences.
+            </p>
+
+            <a href="/dashboard" class="back">
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

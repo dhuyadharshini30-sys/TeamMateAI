@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    <div class="page-header">
+
+        <div class="badge">
+            AI MATCHING ENGINE
+        </div>
+
+        <h1>
+            Recommended Teammates
+        </h1>
+
+        <p>
+            Candidates are matched based on
+            complementary project skills.
+        </p>
+
+    </div>
+
+
+    <div class="candidate-grid">
+
+        {% for candidate in candidates %}
+
+        <div class="candidate-card">
+
+            <div class="candidate-header">
+
+                <div class="avatar large">
+                    {{ candidate.user.name[0]|upper }}
+                </div>
+
+                <div>
+
+                    <h2>
+                        {{ candidate.user.name }}
+                    </h2>
+
+                    <p>
+                        {{ candidate.user.department or
+                           "Student" }}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="match-score">
+
+                <span>
+                    {{ candidate.score }}%
+                </span>
+
+                <small>
+                    Compatibility
+                </small>
+
+            </div>
+
+
+            <div class="candidate-section">
+
+                <h4>
+                    Matching Skills
+                </h4>
+
+                <div class="tags">
+
+                    {% for skill in candidate.matched %}
+
+                        <span class="tag">
+                            {{ skill }}
+                        </span>
+
+                    {% else %}
+
+                        <span>
+                            No direct matches
+                        </span>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+
+            {% if candidate.useful %}
+
+            <div class="candidate-section">
+
+                <h4>
+                    🎯 Fills Team Gaps
+                </h4>
+
+                <div class="tags">
+
+                    {% for skill in candidate.useful %}
+
+                        <span class="tag highlight">
+                            {{ skill }}
+                        </span>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+
+            <div class="why-box">
+
+                <strong>
+                    Why this candidate?
+                </strong>
+
+                <p>
+
+                    {% if candidate.useful %}
+
+                        This candidate has
+                        <strong>
+                        {{ candidate.useful|length }}
+                        </strong>
+                        skill(s) that can fill
+                        gaps in your current team.
+
+                    {% else %}
+
+                        This candidate has skills
+                        related to your project
+                        requirements.
+
+                    {% endif %}
+
+                </p>
+
+            </div>
+
+
+            <form
+                method="POST"
+                action="{{ url_for(
+                    'invite',
+                    team_id=team.id,
+                    user_id=candidate.user.id
+                ) }}">
+
+                <button
+                    type="submit"
+                    class="primary-button full">
+
+                    Send Invitation →
+
+                </button>
+
+            </form>
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-state">
+
+            <h2>
+                No candidates found
+            </h2>
+
+            <p>
+                Ask students to create their profiles
+                and add their skills.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

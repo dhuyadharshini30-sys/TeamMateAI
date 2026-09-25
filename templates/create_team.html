@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <h1>Create Team</h1>
+
+    <h2>{{ project["project_name"] }}</h2>
+
+    <p>
+        {{ project["description"] }}
+    </p>
+
+    <p>
+        Required Members:
+        <strong>{{ project["required_members"] }}</strong>
+    </p>
+
+    <p>
+        Current Members:
+        <strong>{{ team_count }}</strong>
+    </p>
+
+    <hr>
+
+    <h3>Add Team Member</h3>
+
+    <form method="POST">
+
+        <label>Select Student</label>
+
+        <select name="member_id" required>
+
+            <option value="">
+                -- Select Student --
+            </option>
+
+            {% for user in available_users %}
+
+            <option value="{{ user['id'] }}">
+                {{ user['name'] }}
+                -
+                {{ user['department'] }}
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+        <br><br>
+
+        <label>Role</label>
+
+        <select name="role">
+
+            <option value="Member">
+                Member
+            </option>
+
+            <option value="Developer">
+                Developer
+            </option>
+
+            <option value="Designer">
+                Designer
+            </option>
+
+            <option value="AI/ML">
+                AI/ML
+            </option>
+
+            <option value="Data Analyst">
+                Data Analyst
+            </option>
+
+            <option value="Team Lead">
+                Team Lead
+            </option>
+
+        </select>
+
+        <br><br>
+
+        <button type="submit">
+            Add Member
+        </button>
+
+    </form>
+
+    <hr>
+
+    <h3>Current Team</h3>
+
+    {% if team_members %}
+
+        {% for member in team_members %}
+
+            <div>
+
+                <strong>
+                    {{ member["name"] }}
+                </strong>
+
+                <br>
+
+                {{ member["email"] }}
+
+                <br>
+
+                Department:
+                {{ member["department"] }}
+
+                <br>
+
+                Role:
+                {{ member["role"] }}
+
+                <form
+                    method="POST"
+                    action="{{ url_for(
+                        'remove_team_member',
+                        project_id=project['id'],
+                        member_id=member['user_id']
+                    ) }}"
+                >
+
+                    <button type="submit">
+                        Remove
+                    </button>
+
+                </form>
+
+                <hr>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No team members added yet.</p>
+
+    {% endif %}
+
+    <br>
+
+    <a href="{{ url_for('dashboard') }}">
+        ← Back to Dashboard
+    </a>
+
+</div>
+
+{% endblock %}

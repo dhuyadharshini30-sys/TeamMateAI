@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <div class="badge">
+                AI TEAM ANALYSIS
+            </div>
+
+            <h1>
+                {{ team.team_name }}
+            </h1>
+
+            <p>
+                {{ team.project_name }}
+            </p>
+
+        </div>
+
+        <a
+            href="{{ url_for(
+                'candidates',
+                team_id=team.id
+            ) }}"
+            class="primary-button">
+
+            Find Teammates →
+
+        </a>
+
+    </div>
+
+
+    <div class="analysis-grid">
+
+        <div class="analysis-card">
+
+            <span class="analysis-number">
+                {{ members|length }}
+            </span>
+
+            <span>
+                Current Members
+            </span>
+
+        </div>
+
+        <div class="analysis-card">
+
+            <span class="analysis-number">
+                {{ team.required_members }}
+            </span>
+
+            <span>
+                Required Members
+            </span>
+
+        </div>
+
+        <div class="analysis-card danger">
+
+            <span class="analysis-number">
+                {{ missing_skills|length }}
+            </span>
+
+            <span>
+                Skill Gaps
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="two-column">
+
+        <div class="panel">
+
+            <h2>
+                👥 Current Team
+            </h2>
+
+            {% for member in members %}
+
+            <div class="member-row">
+
+                <div class="avatar">
+                    {{ member.name[0]|upper }}
+                </div>
+
+                <div>
+
+                    <strong>
+                        {{ member.name }}
+                    </strong>
+
+                    <small>
+                        {{ member.role }}
+                    </small>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <div class="panel">
+
+            <h2>
+                🚨 Skill Gaps
+            </h2>
+
+            {% if missing_skills %}
+
+                {% for skill in missing_skills %}
+
+                <div class="gap-item">
+
+                    <span>
+                        {{ skill }}
+                    </span>
+
+                    <strong>
+                        MISSING
+                    </strong>
+
+                </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="success-box">
+
+                    ✓ All required skills are covered.
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <div class="panel">
+
+        <h2>
+            Required Skills
+        </h2>
+
+        <div class="tags">
+
+            {% for skill in required_skills %}
+
+                <span class="tag">
+                    {{ skill }}
+                </span>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

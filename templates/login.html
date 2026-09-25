@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <div class="badge">
+            WELCOME BACK
+        </div>
+
+        <h1>
+            Login
+        </h1>
+
+        <p>
+            Continue building your perfect team.
+        </p>
+
+        <form method="POST">
+
+            <label>Email</label>
+
+            <input
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                required
+            >
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Your password"
+                required
+            >
+
+            <button
+                type="submit"
+                class="primary-button full">
+                Login →
+            </button>
+
+        </form>
+
+        <p class="auth-bottom">
+
+            New to TeamMate AI?
+
+            <a href="{{ url_for('register') }}">
+                Create account
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <div class="badge">
+                COMMAND CENTER
+            </div>
+
+            <h1>
+                Welcome,
+                {{ user.name }} 👋
+            </h1>
+
+            <p>
+                Build and manage intelligent teams.
+            </p>
+
+        </div>
+
+        <a href="{{ url_for('create_project') }}" class="primary-button">
+            + Create Project
+        </a>
+
+    </div>
+
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+
+            <span>PROJECTS</span>
+
+            <strong>
+                {{ projects|length }}
+            </strong>
+
+        </div>
+
+        <div class="stat-card">
+
+            <span>PROFILE</span>
+
+            <strong>
+                Active
+            </strong>
+
+        </div>
+
+        <div class="stat-card">
+
+            <span>TEAM ENGINE</span>
+
+            <strong>
+                Ready
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <section class="section">
+
+        <div class="section-title">
+
+            <h2>
+                Your Projects
+            </h2>
+
+        </div>
+
+
+        {% if projects %}
+
+        <div class="project-grid">
+
+            {% for project in projects %}
+
+            <div class="project-card">
+
+                <div class="project-top">
+
+                    <span class="status">
+                        ACTIVE
+                    </span>
+
+                </div>
+
+                <h3>
+                    {{ project.project_name }}
+                </h3>
+
+                <p>
+                    {{ project.description or "No description available." }}
+                </p>
+
+                <div class="project-info">
+
+                    <span>
+                        👥
+                        {{ project.required_members }}
+                        members
+                    </span>
+
+                    <span>
+                        Team members:
+                        {{ project.member_count }}
+                    </span>
+
+                </div>
+
+                <a href="{{ url_for('create_team', project_id=project.id) }}" class="secondary-button">
+                    Manage Team →
+                </a>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-state">
+
+            <h3>
+                No projects yet
+            </h3>
+
+            <p>
+                Create your first hackathon or expo project.
+            </p>
+
+            <a href="{{ url_for('create_project') }}" class="primary-button">
+                Create Project
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </section>
+
+</div>
+
+{% endblock %}pa

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <div class="badge">
+            CREATE YOUR PROFILE
+        </div>
+
+        <h1>
+            Join TeamMate AI
+        </h1>
+
+        <p>
+            Create your professional student profile.
+        </p>
+
+        <form method="POST">
+
+            <label>Name</label>
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Your full name"
+                required
+            >
+
+            <label>Email</label>
+
+            <input
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                required
+            >
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Create password"
+                required
+            >
+
+            <label>Department</label>
+
+            <input
+                type="text"
+                name="department"
+                placeholder="AI & Data Science"
+            >
+
+            <label>Year</label>
+
+            <input
+                type="number"
+                name="year"
+                min="1"
+                max="5"
+                placeholder="2"
+            >
+
+            <button
+                type="submit"
+                class="primary-button full">
+                Create Account
+            </button>
+
+        </form>
+
+        <p class="auth-bottom">
+
+            Already have an account?
+
+            <a href="{{ url_for('login') }}">
+                Login
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

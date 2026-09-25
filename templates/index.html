@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            AI-POWERED TEAM FORMATION
+        </div>
+
+        <h1>
+            Build the
+            <span>right team.</span>
+        </h1>
+
+        <p>
+            TeamMate AI analyzes your project requirements,
+            identifies missing skills and finds the most
+            compatible teammates.
+        </p>
+
+        <div class="hero-buttons">
+
+            {% if session.get('user_id') %}
+
+                <a href="{{ url_for('dashboard') }}"
+                   class="primary-button">
+                    Open Dashboard →
+                </a>
+
+            {% else %}
+
+                <a href="{{ url_for('register') }}"
+                   class="primary-button">
+                    Start Building →
+                </a>
+
+                <a href="{{ url_for('login') }}"
+                   class="secondary-button">
+                    Login
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="features">
+
+    <div class="feature-card">
+        <div class="feature-icon">🧬</div>
+        <h3>Team DNA</h3>
+        <p>
+            Understand every member's skills,
+            strengths and contribution.
+        </p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <h3>Skill Gap Detection</h3>
+        <p>
+            Automatically identify the skills
+            your team is missing.
+        </p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>Smart Matching</h3>
+        <p>
+            Find people who complement your
+            existing team's capabilities.
+        </p>
+    </div>
+
+</section>
+
+{% endblock %}
